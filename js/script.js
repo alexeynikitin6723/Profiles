@@ -29,16 +29,16 @@ sendRequest('GET', requestURL)
 		data = data["results"];
 		for (let key in data) {
 			let name = data[key].name;
-			list.innerHTML += `<li class="item__avatars avatar-item" data-name="${name.first}">
+			list.innerHTML += `<li class="item__avatars avatar-item avatar-item-list" data-name="${name.first}">
 			<div class="avatar-item__content">
 				<div class="avatar-item__image">
 					<img src="${data[key].picture.medium}" alt="medium">
 				</div>
 				<div class="avatar-item__text">
-					<h4 class="avatar-item__name">${name.title}. ${name.first} ${name.last}</h4>
+					<h4>${name.title}. ${name.first} ${name.last}</h4>
 				</div>
 				<div>
-					<select name="sorting" id="sorting" onchange="getSelectedIndex()">
+					<select class="select" name="sorting" id="sorting" onchange="getSelectedIndex()">
 						<option selected value="alph-sort">Сортировка по алфавиту</option>
 						<option value="back-sort">Обратная сортировка</option>
 					</select>
@@ -51,11 +51,15 @@ sendRequest('GET', requestURL)
 			let name = data[key].name;
 			let location = data[key].location;
 			let phone = (data[key].phone).split(' ').join('');
-			listPopup.innerHTML += `<li class="item__avatars avatar-item" data-name="${name.first}">
+			listPopup.innerHTML += `<li class="item__avatars avatar-item item-popup" data-name="${name.first}">
 			<div class="popup-content">
 				<div class="popup-header">
-					<h4 class="avatar-item__name">${name.title}. ${name.first} ${name.last}</h4>
-					<span class="close">&times;</span>
+					<div class="avatar-item__name">
+						<h4>${name.title}. ${name.first} ${name.last}</h4>
+					</div>
+					<div class="close">
+						<span class="close">&times;</span>
+					</div>
 				</div>
 				<div class="popup-body avatar-item">
 					<div class="avatar-item__image">
@@ -112,33 +116,22 @@ function insertAfter(elem, refElem) {
 	return refElem.parentNode.insertBefore(elem, refElem.nextSibling);
 }
 
-
 let popup = document.getElementById('mypopup');
-// let popupToggle = document.getElementById('myBtn');
 let popupClose = document.querySelectorAll('.close');
-
-// popupToggle.onclick = function () {
-// 	popup.style.display = "block";
-// };
-popupClose.onclick = function () {
-	popup.style.display = "none";
-};
-window.onclick = function (event) {
-	if (event.target == popup) {
-		popup.style.display = "none";
-	}
-}
 document.body.addEventListener('click', event => {
 	if (event.target.classList.contains('close')) {
 		popup.style.display = "none";
 	}
 });
-document.body.addEventListener('click', event => {
-	if (event.target.classList.contains('avatar-item__content')) {
+list.addEventListener('click', function (event) {
+	if (event.target.closest('.avatar-item__content') && !event.target.classList.contains('sort-asc') && !event.target.classList.contains('select')) {
 		popup.style.display = "block";
+		console.log(list.children[2].getAttribute('data-name'));
 	}
 });
-
-
-
+listPopup.addEventListener('click', function (event) {
+	if (!event.target.closest('.popup-content')) {
+		popup.style.display = "none";
+	}
+});
 

@@ -98,6 +98,7 @@ select {
 	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 	font-style: italic;
 	background: #efefef;
+	text-align: center;
 }
 
 .wrapper {
@@ -159,6 +160,7 @@ select {
 	display: flex;
 	flex-direction: column;
 	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+	text-align: center;
 }
 .avatar-item__image {
 	text-align: center;
@@ -174,6 +176,7 @@ select {
 	margin: 0px 0px 7px 0px;
 }
 .avatar-item__name {
+	font-size: 16px;
 }
 .sort-asc {
 	margin: 10px 0 0 0;
@@ -227,7 +230,7 @@ select {
 	margin: auto;
 	padding: 0;
 	border: 1px solid #888;
-	width: 30%;
+	width: 50%;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	animation-name: animatetop;
 	animation-duration: 0.4s;
@@ -243,10 +246,17 @@ select {
 	display: flex;
 	padding: 2px 16px;
 	align-items: center;
+	position: relative;
 }
-
+.avatar-item__name {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
 .popup-body {
 	padding: 2px 16px;
+	background-color: #7db3fd17;
 }
 .popup-footer {
 	padding: 2px 16px;
@@ -267,15 +277,20 @@ select {
 	color: #000;
 	display: flex;
 	flex-direction: column;
+	padding: 0px 0 5px 30px;
+	justify-content: center;
+	line-height: 171%;
 }
 .avatar-item__contacts:not(:last-child) {
 	margin: 0px 0px 15px 0px;
 }
 
 .avatar-item__contacts_map {
-	/*background: url("../img/icons/01.svg") 0 0 no-repeat;*/
+	background: url("../img/icons/01.svg") 0 0 no-repeat;
 }
 .avatar-item__contacts_phone {
+	background: url("../img/icons/02.svg") 0 0 no-repeat;
 }
 .avatar-item__contacts_email {
+	background: url("../img/icons/03.svg") 0 0 no-repeat;
 }
